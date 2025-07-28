@@ -77,6 +77,21 @@ Mohd Mufeed
 📍 Lucknow, India
 📧 mufeedmohammad632@gmail.com
 
+## 📊 Dashboard Previews
+
+Here are some previews of the AI-Powered CSV Data Dashboard:
+
+Main Dashboard
+ [Dashboard Screenshot 1](assets/dashboard1.png)
+
+Data Visualization
+ [Dashboard Screenshot 2](assets/dashboard2.png)
+
+AI-Powered Insights
+ [Dashboard Screenshot 3](assets/dashboard3.png)
+
+
+
 
 
 
