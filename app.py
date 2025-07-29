@@ -44,6 +44,8 @@ if uploaded_file is not None:
     try:
         df = pd.read_csv(uploaded_file)
 
+        st.write("Total rows in dataset:", df.shape[0])
+
         # Fix potential serialization issues with Arrow
         for col in df.columns:
             if df[col].dtype == "object":
@@ -57,6 +59,7 @@ if uploaded_file is not None:
         # -------------------------------
         st.subheader("🔍 Dataset Preview")
         st.dataframe(df.head())
+        st.dataframe(df)
 
         # -------------------------------
         # Step 3: Data Summary
@@ -123,14 +126,20 @@ if uploaded_file is not None:
         # -------------------------------
         st.subheader("🤖 AI Assistance")
 
+        # Automated Insights
         st.write("### ✨ Automated Insights")
         if st.button("Generate AI Insights"):
             try:
-                sample_data = df.head(50).to_csv(index=False)
-                prompt = f"""
-You are a professional data analyst. Analyze the following dataset sample and give key insights:
+                dataset_info = f"The dataset has {df.shape[0]} rows and {df.shape[1]} columns. Columns: {list(df.columns)}"
+                sample_data = df.head(200).to_csv(index=False)
 
-Dataset Sample:
+                prompt = f"""
+You are a professional data analyst. Analyze the dataset.
+
+Dataset Information:
+{dataset_info}
+
+Dataset Sample (first 200 rows):
 {sample_data}
 
 Provide observations about trends, anomalies, missing data, or distributions.
@@ -145,21 +154,29 @@ Provide observations about trends, anomalies, missing data, or distributions.
             except Exception as e:
                 st.error(f"Error generating insights: {e}")
 
+        # Ask Questions
         st.write("### 💬 Ask Questions About Your Data")
         user_question = st.text_input("Type your question here:")
         if st.button("Ask AI"):
             if user_question.strip():
                 try:
-                    sample_data = df.head(50).to_csv(index=False)
-                    prompt = f"""
-You are a data analyst. The user has provided a dataset sample in CSV format.
+                    dataset_info = f"The dataset has {df.shape[0]} rows and {df.shape[1]} columns. Columns: {list(df.columns)}"
+                    sample_data = df.head(200).to_csv(index=False)
 
-Dataset Sample:
+                    prompt = f"""
+You are a data analyst. The user has provided a dataset summary and a sample.
+
+Dataset Information:
+{dataset_info}
+
+Dataset Sample (first 200 rows):
 {sample_data}
 
 User question: {user_question}
 
-Answer clearly and provide insights. If calculation is needed, estimate based on the sample provided.
+Answer clearly, using dataset info for counts (like total rows),
+and the sample for trends/patterns. If exact calculations are needed,
+refer to the dataset info instead of assuming only 200 rows exist.
 """
                     response = client.chat.completions.create(
                         messages=[{"role": "user", "content": prompt}],
