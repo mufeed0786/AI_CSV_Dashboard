@@ -26,17 +26,15 @@ A Streamlit-based interactive dashboard that allows users to upload CSV files, e
 
 ## 📂 Project Structure  
 
-bash
-AI_CSV_Dashboard/
-│── app.py           # Main Streamlit app
-│── .env             # API keys & config
-│── data/
-│    └── mydata.csv  # Sample dataset
-│── README.md        # Project documentation
+
+AI_CSV_Dashboard---app.py(Main Streamlit app)---.env(API keys and cofiguration)---data/mydata.csv(sample set)---README.md(project documentation)
+
 
 ⚙️ Installation
-Clone the repository
+Clone the repository--
+
  git clone https://github.com/mufeed0786/AI_CSV_Dashboard.git
+ 
  cd AI_CSV_Dashboard
 
 Create a virtual environment
